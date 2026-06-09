@@ -1,0 +1,13 @@
+{
+  "input_dir": "./input",
+  "output_dir": "./output",
+  "page_size": 10,
+  "presets": {
+    "1": {"name": "mp4(H.264)", "ext": "mp4", "vcodec": "libx264", "acodec": "aac"},
+    "2": {"name": "mp4(H.265)", "ext": "mp4", "vcodec": "libx265", "acodec": "aac"},
+    "3": {"name": "mkv(H.264)", "ext": "mkv", "vcodec": "libx264", "acodec": "copy"},
+    "4": {"name": "avi(Xvid)",  "ext": "avi", "vcodec": "libxvid", "acodec": "mp3"},
+    "5": {"name": "mov(H.264)", "ext": "mov", "vcodec": "libx264", "acodec": "aac"},
+    "6": {"name": "gif",        "ext": "gif", "vcodec": "gif",     "acodec": "none"}
+  }
+}
