@@ -19,6 +19,22 @@ import threading
 # ---------- 常量 ----------
 SCRIPT_DIR = Path(__file__).resolve().parent
 CONFIG_FILE = SCRIPT_DIR / "config.json"
+
+
+# ---------- 打包兼容：自动把 ffmpeg 所在目录加入 PATH ----------
+def _setup_bundled_ffmpeg():
+    """PyInstaller 打包后，ffmpeg 在 _MEIPASS (即 _internal/) 目录下"""
+    if getattr(sys, 'frozen', False):
+        meipass = Path(sys._MEIPASS)
+        # 优先找 _internal/，其次找 exe 同级目录
+        for candidate in [meipass, meipass.parent]:
+            if (candidate / 'ffmpeg.exe').exists():
+                bin_str = str(candidate)
+                if bin_str not in os.environ.get("PATH", ""):
+                    os.environ["PATH"] = bin_str + os.pathsep + os.environ.get("PATH", "")
+                return
+
+_setup_bundled_ffmpeg()
 DEFAULT_CONFIG = {
     "input_dir": "./input",
     "output_dir": "./output",
